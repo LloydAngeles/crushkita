@@ -1,115 +1,497 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>📞 phone booth · 0428 · say yes to heaven</title>
-    <style>
-        * {
-            user-select: none;
-            -webkit-tap-highlight-color: transparent;
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>✦ 0428 · say yes to heaven ✦</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      user-select: none;
+      -webkit-tap-highlight-color: transparent;
+    }
 
-        body {
-            background: linear-gradient(145deg, #f7f0f5 0%, #fce9f0 100%);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            font-family: 'Segoe UI', 'Quicksand', 'Poppins', system-ui, -apple-system, sans-serif;
-            margin: 0;
-            padding: 20px;
-            overflow-x: hidden;
-        }
+    body {
+      min-height: 100vh;
+      background: radial-gradient(circle at 20% 30%, #f4f0fa, #eae4f0);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      padding: 24px;
+    }
 
-        /* scene wrapper */
-        .scene {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            width: 100%;
-            max-width: 450px;
-        }
+    .app {
+      max-width: 520px;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
 
-        /* phone booth container */
-        .booth-container {
-            transition: all 0.8s cubic-bezier(0.34, 1.2, 0.64, 1);
-            transform-origin: center;
-            width: 100%;
-        }
+    /* Telephone Stage */
+    .phone-stage {
+      width: 100%;
+      transition: all 0.6s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+      transform-origin: center bottom;
+    }
 
-        .booth-container.enter {
-            animation: slideInBooth 0.9s ease-out;
-        }
+    .phone-stage.fade-out {
+      animation: fadeOutPhone 2s forwards ease-in-out;
+    }
 
-        @keyframes slideInBooth {
-            0% {
-                opacity: 0;
-                transform: translateY(60px) scale(0.92);
-            }
-            100% {
-                opacity: 1;
-                transform: translateY(0) scale(1);
-            }
-        }
+    @keyframes fadeOutPhone {
+      0% {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+        filter: blur(0);
+      }
+      100% {
+        opacity: 0;
+        transform: scale(0.85) translateY(30px);
+        filter: blur(8px);
+        visibility: hidden;
+        pointer-events: none;
+      }
+    }
 
-        /* fade out effect */
-        .booth-container.fade-out {
-            animation: fadeOutSlow 1.8s forwards;
-        }
+    /* Payphone Card */
+    .payphone-card {
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(12px);
+      border-radius: 56px;
+      padding: 32px 28px 38px;
+      box-shadow: 0 25px 45px -12px rgba(0, 0, 0, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.6);
+    }
 
-        @keyframes fadeOutSlow {
-            0% {
-                opacity: 1;
-                transform: scale(1);
-            }
-            100% {
-                opacity: 0;
-                transform: scale(0.7);
-                visibility: hidden;
-            }
-        }
+    .handset-area {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 28px;
+    }
 
-        /* GIRLY + MINIMAL PAYPHONE */
-        .payphone {
-            background: #fff9fc;
-            border-radius: 48px;
-            width: 100%;
-            padding: 30px 22px 35px;
-            position: relative;
-            box-shadow: 0 25px 45px rgba(255, 150, 180, 0.2), 0 5px 12px rgba(0,0,0,0.05);
-            border: 1px solid #ffe2ed;
-            backdrop-filter: blur(2px);
-        }
+    .handset {
+      background: #ffffff;
+      width: 140px;
+      height: 56px;
+      border-radius: 60px;
+      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.03);
+      border: 1px solid #f0eaf5;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      font-size: 1.6rem;
+      color: #a77eb3;
+    }
 
-        /* hook (soft) */
-        .hook {
-            position: absolute;
-            top: -14px;
-            left: 30px;
-            width: 36px;
-            height: 16px;
-            background: #ffd9e6;
-            border-radius: 30px;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
-        }
+    .display {
+      background: #fefaff;
+      border-radius: 48px;
+      padding: 16px 20px;
+      text-align: center;
+      font-family: monospace;
+      font-weight: 500;
+      font-size: 2rem;
+      letter-spacing: 10px;
+      color: #3a2c44;
+      margin-bottom: 32px;
+      border: 1px solid #ede4f5;
+    }
 
-        /* telephone receiver */
-        .receiver {
-            position: absolute;
-            top: -52px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 170px;
-            height: 68px;
-            background: #ffffff;
-            border-radius: 70px 70px 40px 40px;
-            box-shadow: 0 12px 20px rgba(255, 170, 200, 0.2), inset 0 1px 2px rgba(0,0,0,0.02);
-            cursor: pointer;
+    .keypad-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin: 24px 0 20px;
+    }
+
+    .key {
+      background: #ffffff;
+      border: 1px solid #e9e0f0;
+      border-radius: 60px;
+      padding: 14px 0;
+      font-size: 1.7rem;
+      font-weight: 500;
+      color: #2e2438;
+      font-family: monospace;
+      cursor: pointer;
+      transition: all 0.05s linear;
+    }
+
+    .key:active {
+      transform: scale(0.96);
+      background: #faf5ff;
+    }
+
+    .key.special {
+      background: #f9f4fe;
+      font-size: 0.9rem;
+      color: #a47bb5;
+    }
+
+    .key.call-btn {
+      background: #e9def5;
+      border-color: #d8c8ec;
+      font-weight: 600;
+      color: #624c7c;
+    }
+
+    .status-text {
+      text-align: center;
+      margin-top: 18px;
+      font-size: 0.75rem;
+      color: #a58bba;
+    }
+
+    /* Envelope */
+    .envelope-wrapper {
+      width: 100%;
+      margin-top: 16px;
+    }
+
+    .envelope-card {
+      width: 100%;
+      max-width: 460px;
+      cursor: pointer;
+    }
+
+    .envelope-hidden {
+      opacity: 0;
+      transform: translateY(20px);
+      pointer-events: none;
+      transition: opacity 0.5s ease, transform 0.6s ease;
+    }
+
+    .envelope-visible {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+
+    .fold-closed {
+      max-height: 100px;
+      padding: 28px 28px;
+      background: #fffbfe;
+      border: 1px solid #f7e5f0;
+      border-radius: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      transition: max-height 0.5s ease-in-out;
+    }
+
+    .fold-closed .envelope-icon {
+      font-size: 2.4rem;
+      margin-bottom: 8px;
+      color: #e0b5d2;
+    }
+
+    .fold-closed .closed-text {
+      font-size: 0.85rem;
+      color: #b188a3;
+    }
+
+    .fold-opened {
+      max-height: 800px;
+      padding: 32px 28px 40px;
+      background: #ffffff;
+      border-radius: 48px;
+      border: 1px solid #f7e5f0;
+    }
+
+    .message-inside {
+      opacity: 0;
+      transform: translateY(15px);
+      transition: opacity 0.6s ease 0.15s, transform 0.5s ease 0.1s;
+    }
+
+    .fold-opened .message-inside {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .greeting {
+      font-size: 1.9rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, #d26f9f, #b25683);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      margin-bottom: 20px;
+    }
+
+    .message-body {
+      color: #2a2430;
+      line-height: 1.55;
+      font-size: 1rem;
+      margin: 14px 0 8px;
+      white-space: pre-line;
+    }
+
+    .tiny-signature {
+      margin-top: 24px;
+      font-size: 0.8rem;
+      color: #bd9eb1;
+      border-top: 1px dashed #f2e0ea;
+      padding-top: 16px;
+      font-style: italic;
+    }
+
+    .reset-button {
+      margin-top: 28px;
+      background: rgba(255, 255, 255, 0.6);
+      border: none;
+      font-size: 0.75rem;
+      color: #c7b0cf;
+      cursor: pointer;
+      padding: 8px 16px;
+      border-radius: 60px;
+    }
+
+    .audio-hint {
+      font-size: 0.65rem;
+      color: #cbb7da;
+      margin-top: 12px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+<div class="app">
+  <div class="phone-stage" id="phoneStage">
+    <div class="payphone-card">
+      <div class="handset-area">
+        <div class="handset">
+          <span>📞</span> <span>✦ 0428 ✦</span>
+        </div>
+      </div>
+      <div class="display" id="displayNumber">_ _ _ _</div>
+      <div class="keypad-grid">
+        <button class="key" data-digit="1">1</button>
+        <button class="key" data-digit="2">2</button>
+        <button class="key" data-digit="3">3</button>
+        <button class="key" data-digit="4">4</button>
+        <button class="key" data-digit="5">5</button>
+        <button class="key" data-digit="6">6</button>
+        <button class="key" data-digit="7">7</button>
+        <button class="key" data-digit="8">8</button>
+        <button class="key" data-digit="9">9</button>
+        <button class="key special" id="clearBtn">⌫ clear</button>
+        <button class="key" data-digit="0">0</button>
+        <button class="key call-btn" id="dialBtn">📞 OK</button>
+      </div>
+      <div class="status-text" id="statusMsg">dial 0428 · the secret number</div>
+    </div>
+  </div>
+
+  <div class="envelope-wrapper" id="envelopeWrapper">
+    <div class="envelope-card envelope-hidden" id="envelopeCard">
+      <div id="foldContent" class="fold-closed">
+        <div class="envelope-icon">💌📮</div>
+        <div class="closed-text">✧ tap to open ✧</div>
+      </div>
+      <div id="openedMessage" style="display: none;" class="fold-opened">
+        <div class="message-inside">
+          <div class="greeting">GOODMORNING GORGEOUSSSS!!</div>
+          <div class="message-body">
+            i want to tell you how grateful i am na nakilala kita na its very unexpected. 
+            i just want to say sorry about making you mad sa mga nagagawa ko huhu dont take this small gift as pressure okay? 
+            i just want to make you feel worthy like alarm mo yornch you deserve to be treated like this. 
+            i know priceless to but i want to give you every single kind of gifts as much as possible. 
+            start your day with a smile okay?? im always here and i will always stay for you okay?? mwa!
+          </div>
+          <div class="tiny-signature">♡ always yours ♡</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <button class="reset-button" id="globalResetBtn">↺ reset everything</button>
+  <div class="audio-hint" id="audioHint">🎵 music starts when you open the envelope 🎵</div>
+</div>
+
+<audio id="songPlayer" preload="auto" loop></audio>
+
+<script>
+  let enteredCode = [];
+  const SECRET = "0428";
+  let isCodeMatched = false;
+  let envelopeOpened = false;
+  let isAnimating = false;
+  let musicStarted = false;
+
+  const phoneStage = document.getElementById('phoneStage');
+  const displayDiv = document.getElementById('displayNumber');
+  const statusSpan = document.getElementById('statusMsg');
+  const envelopeCard = document.getElementById('envelopeCard');
+  const foldContentDiv = document.getElementById('foldContent');
+  const openedMessageDiv = document.getElementById('openedMessage');
+  const resetBtn = document.getElementById('globalResetBtn');
+  const audioHint = document.getElementById('audioHint');
+  const audioPlayer = document.getElementById('songPlayer');
+
+  // ⭐ IMPORTANT: CHANGE THIS TO YOUR MP3 FILENAME ⭐
+  audioPlayer.src = "Lana Del Rey - Say Yes To Heaven (Lyrics).mp3";
+  audioPlayer.volume = 0.4;
+  audioPlayer.loop = true;
+
+  function updateDisplayUI() {
+    let text = "";
+    for (let i = 0; i < 4; i++) {
+      text += (i < enteredCode.length) ? enteredCode[i] : "_";
+      if (i < 3) text += " ";
+    }
+    displayDiv.innerText = text;
+  }
+
+  function playBeep() {
+    try {
+      const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+      osc.frequency.value = 880;
+      gain.gain.value = 0.08;
+      osc.type = "sine";
+      osc.start();
+      gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 0.25);
+      osc.stop(audioCtx.currentTime + 0.2);
+      audioCtx.resume().catch(()=>{});
+    } catch(e) {}
+  }
+
+  function addDigit(d) {
+    if (isCodeMatched) return;
+    if (enteredCode.length < 4) {
+      playBeep();
+      enteredCode.push(d);
+      updateDisplayUI();
+      if (enteredCode.length === 4) checkCorrectCode();
+      else statusSpan.innerText = "✦ dialing ... ✦";
+    }
+  }
+
+  function clearDigits() {
+    if (isCodeMatched) return;
+    enteredCode = [];
+    updateDisplayUI();
+    statusSpan.innerText = "⌫ cleared · dial 0428";
+  }
+
+  function triggerPhoneFadeAndEnvelope() {
+    if (isCodeMatched) return;
+    isCodeMatched = true;
+    statusSpan.innerText = "✅ 0428 · connecting ...";
+    phoneStage.classList.add('fade-out');
+    
+    setTimeout(() => {
+      envelopeCard.classList.remove('envelope-hidden');
+      envelopeCard.classList.add('envelope-visible');
+      statusSpan.innerText = "✨ a letter waits for you ✨";
+      audioHint.innerText = "💌 tap the envelope to start the music 💌";
+    }, 2000);
+  }
+
+  function checkCorrectCode() {
+    const codeStr = enteredCode.join('');
+    if (codeStr === SECRET && !isCodeMatched) {
+      triggerPhoneFadeAndEnvelope();
+    } else if (codeStr !== SECRET && enteredCode.length === 4) {
+      statusSpan.innerText = "❌ wrong number · try 0428";
+      setTimeout(() => {
+        if (!isCodeMatched) {
+          enteredCode = [];
+          updateDisplayUI();
+          statusSpan.innerText = "☁️ dial 0428 ☁️";
+        }
+      }, 1200);
+    }
+  }
+
+  function startMusic() {
+    if (musicStarted) return;
+    musicStarted = true;
+    audioPlayer.load();
+    audioPlayer.play().then(() => {
+      audioHint.innerText = "🎵 'Say Yes To Heaven' - Lana Del Rey playing 🎵";
+    }).catch(() => {
+      audioHint.innerText = "🎵 tap anywhere to play music 🎵";
+      const onceClick = () => {
+        audioPlayer.play();
+        audioHint.innerText = "🎵 'Say Yes To Heaven' - Lana Del Rey playing 🎵";
+        document.body.removeEventListener('click', onceClick);
+      };
+      document.body.addEventListener('click', onceClick, { once: true });
+    });
+  }
+
+  function openEnvelope() {
+    if (envelopeOpened || isAnimating) return;
+    isAnimating = true;
+    startMusic();
+
+    foldContentDiv.style.transition = "opacity 0.2s ease";
+    foldContentDiv.style.opacity = "0";
+    
+    setTimeout(() => {
+      foldContentDiv.style.display = "none";
+      openedMessageDiv.style.display = "block";
+      openedMessageDiv.style.opacity = "0";
+      
+      void openedMessageDiv.offsetHeight;
+      openedMessageDiv.style.transition = "opacity 0.6s ease";
+      openedMessageDiv.style.opacity = "1";
+      
+      envelopeOpened = true;
+      isAnimating = false;
+      statusSpan.innerText = "💌 letter opened · 'say yes to heaven' 💌";
+    }, 250);
+  }
+
+  function fullReset() {
+    audioPlayer.pause();
+    audioPlayer.currentTime = 0;
+    musicStarted = false;
+    isCodeMatched = false;
+    envelopeOpened = false;
+    enteredCode = [];
+    isAnimating = false;
+    updateDisplayUI();
+    phoneStage.classList.remove('fade-out');
+    envelopeCard.classList.remove('envelope-visible');
+    envelopeCard.classList.add('envelope-hidden');
+    foldContentDiv.style.display = "flex";
+    foldContentDiv.style.opacity = "1";
+    openedMessageDiv.style.display = "none";
+    statusSpan.innerText = "dial 0428 · the secret number";
+    audioHint.innerText = "🎵 music starts when you open the envelope 🎵";
+  }
+
+  // Event listeners
+  document.querySelectorAll('.key[data-digit]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      if (!isCodeMatched) addDigit(btn.getAttribute('data-digit'));
+    });
+  });
+  document.getElementById('clearBtn').addEventListener('click', () => { if (!isCodeMatched) clearDigits(); });
+  document.getElementById('dialBtn').addEventListener('click', () => {
+    if (!isCodeMatched && enteredCode.length === 4) checkCorrectCode();
+    else if (!isCodeMatched) statusSpan.innerText = `👉 need 4 digits (0428) · ${enteredCode.length}/4`;
+  });
+  envelopeCard.addEventListener('click', (e) => {
+    if (envelopeCard.classList.contains('envelope-visible') && !envelopeOpened && !isAnimating) openEnvelope();
+  });
+  resetBtn.addEventListener('click', fullReset);
+
+  updateDisplayUI();
+</script>
+</body>
+</html>            cursor: pointer;
             border: 1px solid #ffe0ec;
         }
 
